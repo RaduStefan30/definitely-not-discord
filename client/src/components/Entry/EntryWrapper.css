@@ -1,0 +1,8 @@
+.entry__wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fdd1d7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

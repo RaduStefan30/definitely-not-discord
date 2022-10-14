@@ -1,0 +1,16 @@
+.entry-text {
+  color: #999;
+  padding: 2rem;
+  font-size: 1.4rem;
+}
+.entry-text a:link,
+.entry-text a:visited {
+  text-decoration: none;
+  color: #f71735;
+}
+
+.entry-text a:hover,
+.entry-text a:active {
+  text-decoration: none;
+  color: #c6122a;
+}

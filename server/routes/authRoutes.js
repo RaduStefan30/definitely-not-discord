@@ -22,8 +22,4 @@ router.post("/register", validator.body(registerSchema), register);
 
 router.post("/login", validator.body(loginSchema), login);
 
-router.get("/test", auth, (req, res) => {
-  res.send(req.user);
-});
-
 module.exports = router;

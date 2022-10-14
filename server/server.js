@@ -26,4 +26,4 @@ mongoose
       );
     })
   )
-  .catch((err) => console.log("Database connection failed. ", error));
+  .catch((err) => console.log("Database connection failed. ", err));

@@ -1,0 +1,20 @@
+.entry__button {
+  margin: 1rem 2rem 3rem;
+  padding: 1.2rem 2.4rem;
+  background-color: #f71735;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 2rem;
+}
+
+.entry__button:hover {
+  background-color: #c6122a;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.15);
+}
+
+.entry__button:active {
+  scale: 0.98;
+}

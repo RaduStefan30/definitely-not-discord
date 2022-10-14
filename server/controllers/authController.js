@@ -13,12 +13,13 @@ const register = async (req, res) => {
     const emailExists = await User.exists({ email: emailLowercase });
     const userExists = await User.exists({ username: usernameLowercase });
 
-    if (emailExists) return res.status(400).send("Email already in use");
+    if (emailExists)
+      return res.status(400).send("Email address already in use");
     if (userExists) return res.status(400).send("Username already in use");
 
     const encryptedPassword = await bcrypt.hash(password, 10);
 
-    const user = User.create({
+    const user = await User.create({
       email: emailLowercase,
       username: usernameLowercase,
       password: encryptedPassword,
@@ -35,11 +36,9 @@ const register = async (req, res) => {
     );
 
     res.status(201).json({
-      userData: {
-        username: user.username,
-        email: user.email,
-        token,
-      },
+      username: user.username,
+      email: user.email,
+      token,
     });
   } catch (err) {
     res
@@ -68,9 +67,9 @@ const login = async (req, res) => {
         { expiresIn: "24h" }
       );
 
-      return res.status(200).json({
-        userData: { email: emailLowercase, username: user.username, token },
-      });
+      return res
+        .status(200)
+        .json({ email: emailLowercase, username: user.username, token });
     }
 
     res
