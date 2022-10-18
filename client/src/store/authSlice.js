@@ -45,6 +45,14 @@ export const register = (data, onSuccess, onFail) => {
   };
 };
 
+export const logout = () => {
+  return async (dispatch) => {
+    localStorage.removeItem("userData");
+
+    dispatch(authSlice.actions.setUser({}));
+  };
+};
+
 export const authActions = authSlice.actions;
 
 export default authSlice.reducer;

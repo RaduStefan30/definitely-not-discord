@@ -46,7 +46,6 @@ const Login = () => {
   };
 
   const handleLogin = (e) => {
-    console.log("log in");
     e.preventDefault();
     dispatch(login({ email, password }, onSuccess, onFail));
   };

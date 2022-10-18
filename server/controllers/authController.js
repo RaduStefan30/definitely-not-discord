@@ -54,7 +54,7 @@ const login = async (req, res) => {
     //same as above
     const emailLowercase = email.toLowerCase();
 
-    const user = await User.findOne();
+    const user = await User.findOne({ email: emailLowercase });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       //same as above

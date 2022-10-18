@@ -9,7 +9,7 @@ const apiClient = axios.create({
 //executes before every request
 apiClient.interceptors.request.use(
   (config) => {
-    const { token } = JSON.parse(localStorage.getItem("userData"));
+    const { token } = JSON.parse(localStorage.getItem("userData")) || {};
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -30,7 +30,7 @@ export const login = async (data) => {
     return {
       error: true,
       err,
-      message: errorMessage(data),
+      message: errorMessage(data) || err.response.data,
     };
   }
 };
@@ -39,11 +39,23 @@ export const register = async (data) => {
   try {
     return await apiClient.post("/auth/register", data);
   } catch (err) {
-    console.log(err);
     return {
       error: true,
       err,
       message: errorMessage(data) || err.response.data,
+    };
+  }
+};
+
+export const sendFriendInvitation = async (email) => {
+  try {
+    return await apiClient.post("friends/invite", email);
+  } catch (err) {
+    checkStatusCode(err);
+    console.log(err);
+    return {
+      error: true,
+      err,
     };
   }
 };
@@ -63,7 +75,7 @@ const errorMessage = (data) => {
 };
 
 const checkStatusCode = (err) => {
-  const statusCode = err.statusCode.status;
+  const statusCode = err.response.status;
 
   if (statusCode && (statusCode === 401 || statusCode === 403)) {
     logout();
