@@ -11,6 +11,11 @@ const registerSocketServer = (server) => {
     },
   });
 
+  const emitOnlineUsers = () => {
+    const onlineUsers = serverStore.getOnlineUsers();
+    io.emit("onlineUsers", { onlineUsers });
+  };
+
   serverStore.setSocketInstance(io);
 
   io.use((socket, next) => {
@@ -18,14 +23,17 @@ const registerSocketServer = (server) => {
   });
 
   io.on("connection", (socket) => {
-    console.log("connected on id:", socket.id);
-
     newConnectionHandler(socket, io);
+    emitOnlineUsers();
 
     socket.on("disconnect", () => {
       disconnectHandler(socket);
     });
   });
+
+  setInterval(() => {
+    emitOnlineUsers();
+  }, 5000);
 };
 
 module.exports = {

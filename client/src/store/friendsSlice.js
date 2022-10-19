@@ -6,7 +6,7 @@ export const friendsSlice = createSlice({
   name: "friends",
   initialState: {
     friends: [],
-    pendingInvitations: [],
+    invitations: [],
     onlineUsers: [],
   },
   reducers: {
@@ -18,11 +18,11 @@ export const friendsSlice = createSlice({
 
 export const sendFriendInvitation = (email, closeDialog) => {
   return async (dispatch) => {
-    const response = api.sendFriendInvitation(email);
+    const response = api.sendInvitation(email);
 
     if (response.error) {
       //to return onFail
-      console.log(response.error);
+      console.log(response.err);
       return;
     }
     //to return onSuccess
@@ -33,10 +33,51 @@ export const sendFriendInvitation = (email, closeDialog) => {
   };
 };
 
-export const updatePendingInvitation = (pendingInvitations) => {
+export const acceptInvitation = (id) => {
   return async (dispatch) => {
-    console.log(pendingInvitations);
-    dispatch(friendsSlice.actions.setFriends({ pendingInvitations }));
+    const response = await api.acceptInvitation(id);
+
+    if (response.error) {
+      //to return onFail
+      return;
+    }
+    //to return onSuccess
+    console.log("invitation accepted");
+
+    return;
+  };
+};
+
+export const declineInvitation = (id) => {
+  return async (dispatch) => {
+    const response = await api.rejectInvitation(id);
+
+    if (response.error) {
+      //to return onFail
+      return;
+    }
+    //to return onSuccess
+    console.log("invitation declined");
+
+    return;
+  };
+};
+
+export const updatePendingInvitation = (invitations) => {
+  return async (dispatch) => {
+    dispatch(friendsSlice.actions.setFriends({ invitations }));
+  };
+};
+
+export const updateFriends = (friends) => {
+  return async (dispatch) => {
+    dispatch(friendsSlice.actions.setFriends({ friends }));
+  };
+};
+
+export const updateOnlineUsers = (onlineUsers) => {
+  return async (dispatch) => {
+    dispatch(friendsSlice.actions.setFriends({ onlineUsers }));
   };
 };
 

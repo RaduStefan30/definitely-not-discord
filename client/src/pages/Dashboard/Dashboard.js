@@ -7,7 +7,11 @@ import InputField from "../../components/InputField/InputField";
 import { connectSocketServer } from "../../realtime/socketConnection";
 import { showAlert } from "../../store/alertSlice";
 import { logout } from "../../store/authSlice";
-import { sendFriendInvitation } from "../../store/friendsSlice";
+import {
+  sendFriendInvitation,
+  acceptInvitation,
+  declineInvitation,
+} from "../../store/friendsSlice";
 
 import "./Dashboard.css";
 
@@ -15,7 +19,10 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const userDetails = useSelector((state) => state.auth.userData);
+  const { friends, invitations, onlineUsers } = useSelector(
+    (state) => state.friends
+  );
+
   // console.log(userDetails);
   const [displayModal, setDisplayModal] = useState(false);
   const [displayAlert, setDisplayAlert] = useState(false);
@@ -27,6 +34,7 @@ const Dashboard = () => {
     if (!userData) {
       handleLogout();
     }
+
     connectSocketServer(JSON.parse(userData));
   }, []);
 
@@ -48,9 +56,24 @@ const Dashboard = () => {
     dispatch(sendFriendInvitation({ email }));
   };
 
-  const acceptInvitation = () => {};
+  const accept = (id) => {
+    dispatch(acceptInvitation(id));
+  };
 
-  const declineInvitation = () => {};
+  const decline = (id) => {
+    dispatch(declineInvitation(id));
+  };
+
+  const getUsers = (friends = [], onlineUsers = []) => {
+    const allFriends = friends.map((friend) => {
+      const isUserOnline = onlineUsers.find(
+        (user) => user.userId === friend.id
+      );
+      const isOnline = isUserOnline ? true : false;
+      return { ...friend, isOnline };
+    });
+    return allFriends;
+  };
 
   return (
     <div className="dashboard__container">
@@ -83,18 +106,33 @@ const Dashboard = () => {
         <div className="sidebar_content">
           <div>
             <p>Private messages</p>
-            <div>
-              <span>Prieten </span>
-              <span>Online</span>
-            </div>
+            {friends &&
+              getUsers(friends, onlineUsers).map((friend) => {
+                return (
+                  <div key={friend.id}>
+                    <span>{friend.username} </span>
+                    <span>{friend.isOnline && "online"}</span>
+                  </div>
+                );
+              })}
           </div>
           <div>
+            <div>Invitations:</div>
             <div>
-              <div>Invitations</div>
-              <div>
-                Mare boss<button onClick={acceptInvitation}>Yes</button>
-                <button onClick={declineInvitation}>No</button>
-              </div>
+              {invitations &&
+                invitations.map((invitation) => {
+                  return (
+                    <div key={invitation.senderId._id}>
+                      {invitation.senderId.username}
+                      <button onClick={() => accept(invitation._id)}>
+                        Yes
+                      </button>
+                      <button onClick={() => decline(invitation._id)}>
+                        No
+                      </button>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>

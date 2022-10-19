@@ -1,4 +1,10 @@
 import io from "socket.io-client";
+import {
+  updatePendingInvitation,
+  updateFriends,
+  updateOnlineUsers,
+} from "../store/friendsSlice";
+import { store } from "../store/store";
 
 export const connectSocketServer = (userData) => {
   const { token } = userData;
@@ -6,12 +12,21 @@ export const connectSocketServer = (userData) => {
     auth: { token },
   });
 
-  socket.on("connect", () => {
-    console.log("client connected id:", socket.id);
-  });
+  // socket.on("connect", () => {
+  // });
 
   socket.on("invitations", (data) => {
     const { invitations } = data;
-    console.log(data);
+    store.dispatch(updatePendingInvitation(invitations));
+  });
+
+  socket.on("update", (data) => {
+    const { friends } = data;
+    store.dispatch(updateFriends(friends));
+  });
+
+  socket.on("onlineUsers", (data) => {
+    const { onlineUsers } = data;
+    store.dispatch(updateOnlineUsers(onlineUsers));
   });
 };

@@ -47,9 +47,35 @@ export const register = async (data) => {
   }
 };
 
-export const sendFriendInvitation = async (email) => {
+export const sendInvitation = async (email) => {
   try {
     return await apiClient.post("friends/invite", email);
+  } catch (err) {
+    checkStatusCode(err);
+    console.log(err);
+    return {
+      error: true,
+      err,
+    };
+  }
+};
+
+export const acceptInvitation = async (id) => {
+  try {
+    return await apiClient.post("friends/accept", { id });
+  } catch (err) {
+    checkStatusCode(err);
+    console.log(err);
+    return {
+      error: true,
+      err,
+    };
+  }
+};
+
+export const rejectInvitation = async (id) => {
+  try {
+    return await apiClient.post("friends/decline", { id });
   } catch (err) {
     checkStatusCode(err);
     console.log(err);

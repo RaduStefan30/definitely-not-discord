@@ -1,7 +1,7 @@
 const Invitation = require("../models/Invitation");
 const User = require("../models/User");
 
-const friends = require("../socketHandlers/friendsHandler");
+const friendsHandler = require("../socketHandlers/friendsHandler");
 
 const sendInvitation = async (req, res) => {
   const recipientEmail = req.body.email.toLowerCase();
@@ -26,10 +26,9 @@ const sendInvitation = async (req, res) => {
       .status(409)
       .send("An invitation has already been sent to this email address");
   }
-
-  const alreadyFriends = recipient.friends.find((recipientId) => {
-    recipientId.toString() === id.toStrings;
-  });
+  const alreadyFriends = recipient.friends.find(
+    (friend) => friend.toString() === id.toString()
+  );
 
   if (alreadyFriends) {
     return res
@@ -42,9 +41,64 @@ const sendInvitation = async (req, res) => {
     recipientId: recipient._id,
   });
 
-  friends.updateInvitations(recipient._id.toString());
+  friendsHandler.updateInvitations(recipient._id.toString());
 
   return res.status(201).send("Invitation successfully sent");
 };
 
-module.exports = sendInvitation;
+const acceptInvitation = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const invitation = await Invitation.findById(id);
+
+    if (!invitation)
+      res
+        .status(400)
+        .send("Something went wrong. The invitation could not be accepted");
+
+    const { senderId, recipientId } = invitation;
+
+    const sender = await User.findById(senderId);
+    const recipient = await User.findById(recipientId);
+
+    sender.friends = [...sender.friends, recipientId];
+    recipient.friends = [...recipient.friends, senderId];
+
+    await sender.save();
+    await recipient.save();
+
+    await Invitation.findByIdAndDelete(id);
+
+    friendsHandler.updateInvitations(recipientId.toString());
+
+    friendsHandler.updateFriends(recipientId.toString());
+    friendsHandler.updateFriends(senderId.toString());
+
+    return res.status(200).send("Invitation accepted");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong. Try again later");
+  }
+};
+
+const declineInvitation = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const userId = req.user.id;
+
+    const invitationExists = await Invitation.exists({ _id: id });
+
+    if (invitationExists) {
+      await Invitation.findByIdAndDelete(id);
+    }
+
+    friendsHandler.updateInvitations(userId);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Something went wrong. Try again later");
+  }
+  return res.status(200).send("Invitation declined");
+};
+
+module.exports = { sendInvitation, acceptInvitation, declineInvitation };
