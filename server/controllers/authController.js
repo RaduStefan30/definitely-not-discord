@@ -36,6 +36,7 @@ const register = async (req, res) => {
     );
 
     res.status(201).json({
+      id: user._id,
       username: user.username,
       email: user.email,
       token,
@@ -67,9 +68,12 @@ const login = async (req, res) => {
         { expiresIn: "24h" }
       );
 
-      return res
-        .status(200)
-        .json({ email: emailLowercase, username: user.username, token });
+      return res.status(200).json({
+        id: user._id,
+        email: emailLowercase,
+        username: user.username,
+        token,
+      });
     }
 
     res

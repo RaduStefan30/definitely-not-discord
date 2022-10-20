@@ -1,7 +1,9 @@
 const authSocket = require("./middleware/authSocket");
 const newConnectionHandler = require("./socketHandlers/newConnectionHandler");
 const disconnectHandler = require("./socketHandlers/disconnectHandler");
+const messageHandler = require("./socketHandlers/messageHandler");
 const serverStore = require("./serverStore");
+const chatHistoryHandler = require("./socketHandlers/chatHistoryHandler");
 
 const registerSocketServer = (server) => {
   const io = require("socket.io")(server, {
@@ -23,11 +25,19 @@ const registerSocketServer = (server) => {
   });
 
   io.on("connection", (socket) => {
-    newConnectionHandler(socket, io);
+    newConnectionHandler(socket);
     emitOnlineUsers();
+
+    socket.on("message", (data) => {
+      messageHandler(socket, data);
+    });
 
     socket.on("disconnect", () => {
       disconnectHandler(socket);
+    });
+
+    socket.on("chatHistory", (data) => {
+      chatHistoryHandler(socket, data);
     });
   });
 

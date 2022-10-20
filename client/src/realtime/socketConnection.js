@@ -5,15 +5,15 @@ import {
   updateOnlineUsers,
 } from "../store/friendsSlice";
 import { store } from "../store/store";
+import { updateActiveChat } from "../utils/chat";
+
+let socket;
 
 export const connectSocketServer = (userData) => {
   const { token } = userData;
-  const socket = io("http://localhost:5002", {
+  socket = io("http://localhost:5002", {
     auth: { token },
   });
-
-  // socket.on("connect", () => {
-  // });
 
   socket.on("invitations", (data) => {
     const { invitations } = data;
@@ -29,4 +29,16 @@ export const connectSocketServer = (userData) => {
     const { onlineUsers } = data;
     store.dispatch(updateOnlineUsers(onlineUsers));
   });
+
+  socket.on("chatHistory", (data) => {
+    updateActiveChat(data);
+  });
+};
+
+export const sendMessage = (data) => {
+  socket.emit("message", data);
+};
+
+export const getChatHistory = (data) => {
+  socket.emit("chatHistory", data);
 };
