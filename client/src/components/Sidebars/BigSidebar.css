@@ -1,0 +1,59 @@
+.sidebar--big {
+  background-color: #fdd1d7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar__heading {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.sidebar__heading::after {
+  content: "";
+  height: 1px;
+  width: 70%;
+  display: block;
+  background-color: #5c0029;
+  margin: 1rem auto;
+}
+
+.sidebar__friends {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar__invitations {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar__content {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+.add-friend {
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  color: #fff;
+  background-color: #5c0029;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease-out;
+  margin: 2.4rem;
+}
+
+.add-friend:hover {
+  background-color: #f71735;
+}

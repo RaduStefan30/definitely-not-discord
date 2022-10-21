@@ -1,0 +1,10 @@
+.chat {
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
+}
+
+.chat__heading {
+}
+
+.chat__form {
+}

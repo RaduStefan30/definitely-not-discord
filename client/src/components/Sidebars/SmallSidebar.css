@@ -1,0 +1,21 @@
+.sidebar__button--small {
+  font-size: 3.2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #5c0029;
+  margin-top: 1rem;
+}
+
+.sidebar__group-logo {
+  font-size: 3.2rem;
+  color: #5c0029;
+  margin-top: 2rem;
+}
+
+.sidebar--small {
+  background-color: #fdb9c2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

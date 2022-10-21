@@ -1,8 +1,25 @@
 .entry__wrapper {
   width: 100%;
   min-height: 100vh;
-  background-color: #fdd1d7;
+  background-color: #fdb9c2;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.entry__container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  min-height: 80rem;
+  width: 85vw;
+  border-radius: 1rem;
+  background: linear-gradient(
+    110deg,
+    #fbfef9 0%,
+    #fbfef9 45%,
+    rgba(251, 254, 249, 0.6) 45%,
+    rgba(251, 254, 249, 0.6) 100%
+  );
+  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.1);
+  margin: 5rem;
 }

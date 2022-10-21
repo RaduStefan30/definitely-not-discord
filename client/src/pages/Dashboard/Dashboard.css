@@ -1,70 +1,14 @@
 .dashboard__container {
   display: grid;
-  grid-template-columns: 1fr 4fr 20fr;
+  grid-template-columns: 0.8fr 4fr 18fr;
   color: #011627;
   width: 100%;
   min-height: 100vh;
   position: relative;
 }
 
-.sidebar--small {
-  background-color: red;
-}
-
-.sidebar--big {
-  background-color: yellow;
-}
-
 .chat {
-  background-color: #fdd1d7;
-}
-
-.sidebar_content {
-  height: 100%;
-  display: grid;
-  grid-template-rows: 2fr 1fr;
-}
-
-.modal {
-  position: absolute;
-  width: 50rem;
-  height: 30rem;
-  background-color: #fbfef9;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  border-radius: 0.5rem;
-}
-
-.modal__close {
-  position: absolute;
-  top: -0.5rem;
-  right: 0.5rem;
-  font-size: 4rem;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: red;
-}
-
-.modal__text {
-  font-size: 1.8rem;
-  color: #777;
-  text-align: center;
-  padding: 1rem;
-  margin-bottom: 3rem;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.6);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
+  background-color: #fee8eb;
 }
 
 .logout__button {

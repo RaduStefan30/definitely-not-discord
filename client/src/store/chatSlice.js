@@ -14,6 +14,7 @@ export const chatSlice = createSlice({
         date: "",
         type: "",
         sameDate: "",
+        isCurrentUser: "",
       },
     ],
   },

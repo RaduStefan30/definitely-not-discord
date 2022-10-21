@@ -1,0 +1,22 @@
+.friend__conversation-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #444;
+  transition: color 0.3s;
+}
+
+.friend__conversation-button:hover {
+  color: #5c0029;
+}
+
+.friend__username {
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+}
+
+.online {
+  font-size: 1.2rem;
+  color: #4cbb17;
+}

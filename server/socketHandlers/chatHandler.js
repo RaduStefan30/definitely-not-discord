@@ -23,7 +23,7 @@ const updateChat = async (conversationId, socketId = null) => {
     conversation.interlocutors.forEach((id) => {
       const activeConnections = serverStore.getActiveConnections(id.toString());
 
-      activeConnections.forEach((socketId) => {
+      return activeConnections.forEach((socketId) => {
         io.to(socketId).emit("chatHistory", {
           messages: conversation.messages,
           interlocutors: conversation.interlocutors,

@@ -6,20 +6,3 @@
   width: 90%;
   justify-self: right;
 }
-
-.entry__container {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  min-height: 80rem;
-  width: 85vw;
-  border-radius: 1rem;
-  background: linear-gradient(
-    110deg,
-    #fbfef9 0%,
-    #fbfef9 45%,
-    rgba(251, 254, 249, 0.4) 45%,
-    rgba(251, 254, 249, 0.4) 100%
-  );
-  box-shadow: 0 1rem 2rem 0 rgba(0, 0, 0, 0.1);
-  margin: 5rem;
-}

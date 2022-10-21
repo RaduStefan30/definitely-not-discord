@@ -1,0 +1,30 @@
+.invitation__container {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  gap: 1rem;
+  margin: 0 2rem;
+}
+
+.invitation__username {
+  font-size: 1.6rem;
+  color: #444;
+}
+
+.invitation__button {
+  font-size: 1.6rem;
+  background: transparent;
+  border: none;
+  padding: 0rem 0.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #5c0029;
+}
+
+.invitation__button:hover {
+  color: #f71735;
+}
+
+.invitation__buttons {
+  min-width: 6rem;
+}
