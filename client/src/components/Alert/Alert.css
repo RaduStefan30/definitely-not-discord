@@ -7,10 +7,10 @@
 }
 
 .alert-danger {
-  color: white;
-  background: rgb(255, 100, 100);
+  color: #fff;
+  background: rgba(255, 100, 100, 0.8);
 }
 .alert-success {
-  color: black;
-  background: green;
+  color: #fff;
+  background: rgba(0, 128, 0, 0.8);
 }

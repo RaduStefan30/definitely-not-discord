@@ -5,6 +5,11 @@
   cursor: pointer;
   color: #5c0029;
   margin-top: 1rem;
+  transition: color 0.3s;
+}
+
+.sidebar__button--small:hover {
+  color: #f71735;
 }
 
 .sidebar__group-logo {

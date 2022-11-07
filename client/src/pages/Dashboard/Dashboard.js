@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
-  connectSocketServer,
-  getChatHistory,
-} from "../../realtime/socketConnection";
-import { showAlert } from "../../store/alertSlice";
+import { connectSocketServer } from "../../realtime/socketConnection";
 import { logout } from "../../store/authSlice";
 
 import "./Dashboard.css";
@@ -14,13 +10,13 @@ import Modal from "../../components/Modal/Modal";
 import SmallSidebar from "../../components/Sidebars/SmallSidebar";
 import BigSidebar from "../../components/Sidebars/BigSidebar";
 import Chat from "../../components/Chat/Chat";
+import { BsPower } from "react-icons/bs";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [displayModal, setDisplayModal] = useState(false);
-  const [displayAlert, setDisplayAlert] = useState(false);
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -51,6 +47,9 @@ const Dashboard = () => {
       <SmallSidebar />
       <BigSidebar showModal={showModal} />
       <Chat />
+      <button className="logout__button" onClick={handleLogout}>
+        <BsPower />
+      </button>
     </div>
   );
 };

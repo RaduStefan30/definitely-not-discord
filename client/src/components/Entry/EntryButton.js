@@ -1,8 +1,12 @@
 import "./EntryButton.css";
 
 const EntryButton = (props) => {
-  const { text } = props;
-  return <button className="entry__button">{text}</button>;
+  const { text, type, onClick } = props;
+  return (
+    <button className="entry__button" onClick={onClick} type={type}>
+      {text}
+    </button>
+  );
 };
 
 export default EntryButton;

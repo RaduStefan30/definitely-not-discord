@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getChatHistory } from "../../realtime/socketConnection";
+import { IoIosSend } from "react-icons/io";
 
 import "./Chat.css";
+import { getChatHistory } from "../../realtime/socketConnection";
 import { sendMessage } from "../../realtime/socketConnection";
 import Messages from "./Messages";
 
@@ -29,11 +30,15 @@ const Chat = () => {
       {chatDetails && (
         <form className="chat__form" onSubmit={(e) => handleMessage(e)}>
           <input
+            autoFocus
+            className="chat__input"
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <button>Send message</button>
+          <button className="chat__button">
+            <IoIosSend />
+          </button>
         </form>
       )}
     </div>

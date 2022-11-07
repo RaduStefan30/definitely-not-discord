@@ -3,3 +3,20 @@
   flex-direction: column;
   padding: 5rem;
 }
+
+.login__buttons {
+  display: flex;
+}
+
+.login__buttons button {
+  flex: 1;
+}
+
+.login__buttons button:last-child {
+  background: #777;
+}
+
+.alert__container {
+  height: 4rem;
+  transform: translateY(-6rem);
+}

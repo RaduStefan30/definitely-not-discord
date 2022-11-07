@@ -50,11 +50,19 @@ const Login = () => {
     dispatch(login({ email, password }, onSuccess, onFail));
   };
 
+  const handleClick = () => {
+    dispatch(
+      login({ email: "test@test.com", password: "parola" }, onSuccess, onFail)
+    );
+  };
+
   return (
     <EntryWrapper>
       <form className="login__form" onSubmit={(e) => handleLogin(e)}>
         <Logo classes="logo--big" />
-        {displayAlert && <Alert />}
+        <div className="alert__container">
+          <Alert />
+        </div>
         <InputField
           value={email}
           setValue={setEmail}
@@ -69,7 +77,10 @@ const Login = () => {
           type="password"
           placeholder="********"
         />
-        <EntryButton text={"Log in"} />
+        <div className="login__buttons">
+          <EntryButton text={"Log in"} type="submit" />
+          <EntryButton text={"Demo"} onClick={handleClick} type="button" />
+        </div>
         <EntryLink
           text="Don't have an account?"
           linkText="Register"

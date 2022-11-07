@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Moment from "react-moment";
 
 import "./Message.css";
@@ -6,17 +7,22 @@ const Message = (props) => {
   const { chatUser, message } = props;
 
   return (
-    <div
-      className={
-        chatUser === message.username ? "message--left" : "message--right"
-      }
-    >
+    <Fragment>
       {message.date && !message.sameDate && (
-        <Moment format="DD MMM YYYY">{message.date}</Moment>
+        <div className="message__date">
+          <Moment format="DD MMM YYYY">{message.date}</Moment>
+        </div>
       )}
-      {(!message.sameSender || !message.sameDate) && message.username}
-      {message.content}
-    </div>
+      <div
+        className={
+          chatUser === message.username
+            ? "message message--left"
+            : "message message--right"
+        }
+      >
+        {message.content}
+      </div>
+    </Fragment>
   );
 };
 

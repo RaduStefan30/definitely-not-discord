@@ -5,6 +5,8 @@
   text-transform: uppercase;
   color: #444;
   transition: color 0.3s;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
 }
 
 .friend__conversation-button:hover {
@@ -19,4 +21,14 @@
 .online {
   font-size: 1.2rem;
   color: #4cbb17;
+}
+
+.friend__chatting {
+  background-color: #5c0029;
+  color: #eee;
+}
+
+.friend__chatting:hover {
+  color: #eee;
+  background-color: rgba(92, 0, 41, 0.9);
 }
